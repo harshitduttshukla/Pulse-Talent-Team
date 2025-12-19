@@ -51,8 +51,10 @@ export const processVideo = async (videoId: string) => {
             if (progress >= 100) {
                 clearInterval(interval);
 
-                // Random sensitivity result
-                const isSafe = Math.random() > 0.3; // 70% safe
+                // Simulate AI sensitivity detection (Always safe for development purposes)
+                // In a real app, this would call an AI service
+                // const isSafe = Math.random() > 0.3; // Previously random
+                const isSafe = true; // Forced safe for demo
                 video.status = 'completed';
                 video.sensitivityStatus = isSafe ? 'safe' : 'flagged';
                 await video.save();

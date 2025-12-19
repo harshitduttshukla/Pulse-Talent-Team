@@ -42,7 +42,12 @@ const Dashboard = () => {
             if (filterMinSize) params.append('minSize', filterMinSize);
 
             const { data } = await api.get(`/videos?${params.toString()}`);
-            setVideos(data); // Backend returns filtered list, frontend just sorts
+            if (Array.isArray(data)) {
+                setVideos(data);
+            } else {
+                console.error('API returned non-array data:', data);
+                setVideos([]);
+            }
         } catch (error) {
             console.error('Failed to fetch videos', error);
         }
@@ -86,12 +91,12 @@ const Dashboard = () => {
         };
     }, []);
 
-    const filteredAndSortedVideos = videos.sort((a, b) => {
+    const filteredAndSortedVideos = Array.isArray(videos) ? videos.sort((a, b) => {
         if (sortBy === 'newest') return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         if (sortBy === 'oldest') return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
         if (sortBy === 'size_desc') return (b.size || 0) - (a.size || 0);
         return 0;
-    });
+    }) : [];
 
     const StatusBadge = ({ status, sensitivity }: { status: string, sensitivity: string }) => {
         if (status === 'processing') {
@@ -210,7 +215,7 @@ const Dashboard = () => {
                             <div className="h-40 bg-gray-100 relative group-hover:bg-gray-200 transition-colors flex items-center justify-center overflow-hidden">
                                 {video.thumbnail ? (
                                     <img
-                                        src={`http://localhost:5000/uploads/${video.thumbnail}`}
+                                        src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/uploads/${video.thumbnail}`}
                                         alt={video.title}
                                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                         onError={(e) => {

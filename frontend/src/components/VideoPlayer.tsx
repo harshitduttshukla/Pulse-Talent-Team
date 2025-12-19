@@ -15,15 +15,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId }) => {
     }, [videoId]);
 
     return (
-        <div className="video-container bg-black rounded-lg overflow-hidden shadow-lg aspect-w-16 aspect-h-9">
+        <div className="video-container bg-black rounded-lg overflow-hidden shadow-lg aspect-video">
             <video
                 ref={videoRef}
                 controls
-                width="100%"
-                height="auto"
+                className="w-full h-full"
                 crossOrigin="anonymous"
             >
-                <source src={`http://localhost:5000/api/videos/${videoId}/stream`} type="video/mp4" />
+                <source src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/videos/${videoId}/stream`} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>

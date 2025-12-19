@@ -91,7 +91,7 @@ const Library = () => {
                         <div className="h-48 bg-gray-100 relative group-hover:bg-gray-200 transition-colors flex items-center justify-center overflow-hidden">
                             {video.thumbnail ? (
                                 <img
-                                    src={`http://localhost:5000/uploads/${video.thumbnail}`}
+                                    src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/uploads/${video.thumbnail}`}
                                     alt={video.title}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                     onError={(e) => {

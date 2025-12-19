@@ -1,7 +1,7 @@
-import React, { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import api from '../api/axios';
-import { Upload, X, FileVideo, AlertCircle, CheckCircle } from 'lucide-react';
-import { AuthContext } from '../context/AuthContext';
+import { Upload, FileVideo } from 'lucide-react';
+
 
 interface UploadVideoProps {
     onUploadSuccess: () => void;
@@ -43,9 +43,7 @@ const UploadVideo: React.FC<UploadVideoProps> = ({ onUploadSuccess }) => {
         }
     };
 
-    const onButtonClick = () => {
-        inputRef.current?.click();
-    };
+
 
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault();

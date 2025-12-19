@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LogOut, Upload, Video, User } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 
 const Layout = () => {
     const { user, logout } = useContext(AuthContext);

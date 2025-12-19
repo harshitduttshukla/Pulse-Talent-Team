@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../api/axios';
 import VideoPlayer from '../components/VideoPlayer';
 import { Play, Clock } from 'lucide-react';
@@ -13,6 +13,7 @@ interface Video {
     createdAt: string;
     size?: number;
     category?: string;
+    thumbnail?: string;
 }
 
 const Library = () => {
